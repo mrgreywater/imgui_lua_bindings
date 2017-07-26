@@ -234,8 +234,9 @@ sub generateImguiGeneric {
           # const char* a or const char* a = NULL or "blah"
         } elsif ($args[$i] =~ m/^ *const char\* *([^ =\[]*)( *= *(NULL|".*")|) *$/) {
           my $name = $1;
-          if ($2 =~ m/^ *= *NULL$/) {
-            push(@before, "OPTIONAL_LABEL_ARG($name)");
+          if ($2) {
+            my $default_val = $3;
+            push(@before, "OPTIONAL_LABEL_ARG($name, $default_val)");
           } else {
             push(@before, "LABEL_ARG($name)");
           }

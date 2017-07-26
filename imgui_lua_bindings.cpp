@@ -99,12 +99,12 @@ static int impl_##name(lua_State *L) { \
 #define IM_TEXTURE_ID_ARG(name) \
   const ImTextureID name = (ImTextureID)luaL_checkinteger(L, arg++);
 
-#define OPTIONAL_LABEL_ARG(name) \
+#define OPTIONAL_LABEL_ARG(name, default_val) \
   const char* name; \
   if (arg <= max_args) { \
     name = lua_tostring(L, arg++); \
   } else { \
-    name = NULL; \
+    name = default_val; \
   }
 
 #define LABEL_ARG(name) \
@@ -307,7 +307,7 @@ static const struct luaL_Reg imguilib [] = {
 #undef IM_TEXTURE_ID_ARG
 #define IM_TEXTURE_ID_ARG(name)
 #undef OPTIONAL_LABEL_ARG
-#define OPTIONAL_LABEL_ARG(name)
+#define OPTIONAL_LABEL_ARG(name, default_val)
 #undef LABEL_ARG
 #define LABEL_ARG(name)
 #undef IM_VEC_2_ARG
@@ -420,7 +420,7 @@ static void PushImguiEnums(lua_State* lState, const char* tableName) {
 #undef IM_TEXTURE_ID_ARG
 #define IM_TEXTURE_ID_ARG(name)
 #undef OPTIONAL_LABEL_ARG
-#define OPTIONAL_LABEL_ARG(name)
+#define OPTIONAL_LABEL_ARG(name, default_val)
 #undef LABEL_ARG
 #define LABEL_ARG(name)
 #undef IM_VEC_2_ARG
